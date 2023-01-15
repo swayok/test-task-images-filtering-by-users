@@ -24,7 +24,6 @@ services:
         networks:
             - sail
     postgres:
-        container_name: postgres
         image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-5432}:5432'
