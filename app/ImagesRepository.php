@@ -6,7 +6,7 @@ namespace App;
 
 use App\Models\Images;
 
-class ImagesRegistry
+class ImagesRepository
 {
     public function getImagesPack(int $limit = 10, int $iteration = 0): array
     {
@@ -20,7 +20,8 @@ class ImagesRegistry
         }
         $decidedIds = Images::select(['image_id'])
             ->whereIn('id', $ids)
-            ->get('image_id')
+            ->get()
+            ->pluck('image_id')
             ->toArray();
 
         $ids = array_diff($ids, $decidedIds);
@@ -33,10 +34,15 @@ class ImagesRegistry
         foreach ($ids as $id) {
             $images[] = [
                 'id' => $id,
-                'url' => "https://picsum.photos/id/{$id}/600/500"
+                'url' => $this->getUrlForId($id)
             ];
         }
         return $images;
+    }
+
+    public function getUrlForId(int $id, int $width = 600, int $height = 500): string
+    {
+        return "https://picsum.photos/id/{$id}/{$width}/{$height}";
     }
 
 }

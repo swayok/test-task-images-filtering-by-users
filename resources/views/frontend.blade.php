@@ -5,7 +5,7 @@
 
 ?>
 
-@extends('layout')
+@extends('frontend_layout')
 
 @section('page-content')
     <div class="card" id="image-picker-card">

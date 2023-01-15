@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\ImageDecision;
-use App\ImagesRegistry;
+use App\ImagesRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
@@ -14,14 +14,14 @@ class FrontendController extends Controller
     public function index(): View
     {
         return view('frontend', [
-            'images' => (new ImagesRegistry())->getImagesPack()
+            'images' => (new ImagesRepository())->getImagesPack()
         ]);
     }
 
     public function getImages(): JsonResponse
     {
         return new JsonResponse([
-            'images' => (new ImagesRegistry())->getImagesPack()
+            'images' => (new ImagesRepository())->getImagesPack()
         ]);
     }
 
