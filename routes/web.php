@@ -1,18 +1,14 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', [FrontendController::class, 'index']);
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('api/images', [FrontendController::class, 'getImages']);
+
+Route::post('api/image/{id}/accept', [FrontendController::class, 'acceptImage'])
+    ->where('id', '^\d+$');
+Route::post('api/image/{id}/reject', [FrontendController::class, 'rejectImage'])
+    ->where('id', '^\d+$');
+
